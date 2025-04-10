@@ -11,6 +11,7 @@ local colors = require('render-markdown.colors')
 ---@field sign? string
 ---@field foreground? string
 ---@field background? string
+---@field border_background? string
 ---@field width render.md.heading.Width
 ---@field left_margin number
 ---@field left_pad number
@@ -42,6 +43,11 @@ function Render:setup()
     else
         atx, level = true, Str.width(self.node.text)
     end
+    for i, bg in pairs(self.heading.backgrounds) do
+        if self.heading.border_backgrounds[i] == nil then
+            self.heading.border_backgrounds[i] = bg
+        end
+    end
 
     self.data = {
         atx = atx,
@@ -50,6 +56,7 @@ function Render:setup()
         sign = List.cycle(self.heading.signs, level),
         foreground = List.clamp(self.heading.foregrounds, level),
         background = List.clamp(self.heading.backgrounds, level),
+        border_background = List.clamp(self.heading.border_backgrounds, level),
         width = List.clamp(self.heading.width, level) or 'full',
         left_margin = List.clamp(self.heading.left_margin, level) or 0,
         left_pad = List.clamp(self.heading.left_pad, level) or 0,
@@ -189,7 +196,7 @@ function Render:border(width)
     end
 
     local foreground = self.data.foreground
-    local background = self.data.background and colors.bg_to_fg(self.data.background)
+    local background = self.data.border_background and colors.bg_to_fg(self.data.border_background)
     local prefix = self.heading.border_prefix and self.data.level or 0
     local virtual = self.heading.border_virtual
 

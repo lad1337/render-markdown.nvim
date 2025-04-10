@@ -38,6 +38,11 @@ function M.setup(default_config, user_config)
             config.file_types = lazy_file_types
         end
     end
+    for i, bg in pairs(config.heading.backgrounds) do
+        if config.heading.border_backgrounds[i] == nil then
+            config.heading.border_backgrounds[i] = bg
+        end
+    end
 
     M.config = config
     M.enabled = config.enabled
