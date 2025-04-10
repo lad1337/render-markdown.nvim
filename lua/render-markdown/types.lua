@@ -142,6 +142,7 @@
 ---@field public border boolean
 ---@field public border_virtual boolean
 ---@field public border_prefix boolean
+---@field public border_backgrounds string[]
 ---@field public above string
 ---@field public below string
 ---@field public backgrounds string[]

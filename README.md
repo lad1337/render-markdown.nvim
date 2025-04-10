@@ -274,6 +274,9 @@ require('render-markdown').setup({
             'RenderMarkdownH5',
             'RenderMarkdownH6',
         },
+        -- The 'level' is used to index into the list using a clamp
+        -- Highlight for the heading border, defaults to `backgrounds`
+        border_backgrounds = {},
     },
     paragraph = {
         -- Turn on / off paragraph rendering
